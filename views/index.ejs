@@ -1,0 +1,38 @@
+
+<%- include('./partials/header') %>
+
+<div class="container index-wrapper">
+    <h3>Saved Products</h3>
+    <hr>
+
+    <% if(data && data?.status === 'success') { %>
+        <table class='table'>
+            <thead>
+                <tr>
+                    <th> ID </th> <th> Name </th> 
+                    <th> Description </th> <th> Price </th>
+                    <th> Actions </th>
+                </tr>
+            </thead>
+            <tbody>
+               <% data.data.map((record, index) => { %>
+                    <tr>
+                        <td> <%= (index + 1) %> </td>
+                        <td> <%= record.name %> </td>
+                        <td> <%= record.description %> </td>
+                        <td> <%= record.price %> </td>
+                        <td>
+                            <a href="/edit/<%= record.id %>"> edit </a> | 
+                            <a href="/delete/<%= record.id %>"> delete </a>
+                        </td>
+                    </tr>
+                <% }) %>   
+            </tbody>
+        
+        </table>
+    <% } else { %>
+        <%= data.message %>
+    <% } %>
+</div>
+
+<%- include('./partials/footer') %>
